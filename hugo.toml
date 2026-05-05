@@ -1,0 +1,15 @@
+baseURL = 'https://gakes.net/'
+languageCode = 'zh-tw'
+title = 'gakes'
+theme = 'PaperMod'
+
+[params]
+  description = 'Gurry, Annie, Kelly, Emily & Sally'
+  author = 'Gurry'
+  keywords = ['NAS', 'homelab', 'DevOps', 'AI']
+
+[outputs]
+  home = ['HTML', 'JSON']
+
+[markup.goldmark.renderer]
+  unsafe = true
