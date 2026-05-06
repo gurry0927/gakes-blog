@@ -1,9 +1,9 @@
 +++
 date = '2026-05-05'
 draft = false
-title = '三塊硬盤的分工戰略：用老零件撐起一個 NAS'
+title = '2026 還敢自組 NAS？三塊老硬碟的分工戰略'
 description = '有限硬體、謹慎規劃、一個關於壽命與備份的選擇題'
-tags = ['NAS', 'homelab', '備份', '硬體']
+tags = ['NAS', 'homelab', '老硬碟改造', '家用NAS', '2026硬體漲價', '硬碟壽命']
 mermaid = true
 
 [cover]
@@ -126,6 +126,8 @@ graph TD
 
 我 500GB 的備份盤，輕鬆塞進七天完整快照。
 
+主盤哪天真的掛了，找最近的快照復原就好。
+
 ```mermaid
 graph LR
     subgraph Day1[第一天備份]
@@ -141,8 +143,6 @@ graph LR
     B2 -->|佔新空間|B2
     C2 -->|佔新空間|C2
 ```
-
-主盤哪天真的掛了，找最近的快照復原就好。
 
 ---
 
