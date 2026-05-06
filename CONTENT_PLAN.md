@@ -7,6 +7,14 @@
 
 ---
 
+## 概念層（完全小白，建立基礎認知）
+
+### Docker 是什麼：為什麼 NAS 上的服務都用它跑
+- 怎麼扒：公司 VM 踩坑的對比（接第一篇故事）、container vs VM 的差異
+- 補充：image / container / compose 三個詞的關係、為什麼「壞了重建比修復快」
+
+---
+
 ## 入門層（小白能看懂，不需要動手）
 
 ### 2026 還敢組電腦：14400F + DDR4 32G 的選擇邏輯
@@ -68,6 +76,22 @@
 ### code-server：在 NAS 上跑 VS Code，隨時遠端開發
 - 怎麼扒：systemd user 服務設定、Cloudflare Tunnel 綁定
 - 補充：為什麼不用 Docker（需要 home 目錄存取）
+
+### LINE Bot：用 LINE 跟 NAS 說話
+- 怎麼扒：linebot 現有功能、LINE Messaging API、webhook 架構
+- 補充：reply vs push 額度差異、未來想做的功能（提醒、yt-dlp 觸發）
+
+### Samba：讓全家人都能用 NAS 的共用磁碟
+- 怎麼扒：Mac/iPhone/iPad 連線方式、photos 資料夾作為 Immich 照片入口
+- 補充：只開放必要子目錄的安全設計
+
+### 壞機不怕：從 SOP 到 5 小時內重建完整環境
+- 怎麼扒：INFRA.md 的重建步驟、.env 從備份取回、哪些東西真的會消失
+- 補充：文件即基礎設施的概念、為什麼 INFRA.md 比腦袋可靠
+
+### Supabase Auth：不用自己寫 auth，一套認證管所有服務
+- 怎麼扒：user_roles 白名單設計、token 快取、keepalive 防休眠
+- 補充：Supabase 免費方案的限制
 
 ---
 
