@@ -1,7 +1,7 @@
 +++
 date = '2026-05-05'
 draft = false
-title = '2026 還敢自組 NAS？三塊老硬碟的分工戰略'
+title = '【小白篇】2026 還敢自組 NAS？三塊老硬碟的分工戰略'
 description = '有限硬體、謹慎規劃、一個關於壽命與備份的選擇題'
 tags = ['NAS', 'homelab', '老硬碟改造', '家用NAS', '2026硬體漲價', '硬碟壽命']
 mermaid = true
