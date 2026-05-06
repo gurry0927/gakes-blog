@@ -21,6 +21,22 @@
   - **AI 遵守的方式** — 把 INFRA.md 作為每次對話的背景知識，開口前先丟進去；AI 才知道你的設計決策，不會每次給出違反架構的建議
 - 補充：「文件即基礎設施」概念、為什麼規則比記憶可靠、壞機重建時 INFRA.md 是救命稻草
 
+### SSH Key 是什麼：為什麼有它就能來去自如
+- 小白問題（直接寫進文章）：
+  - 「禁用密碼登入之後，sudo 還要密碼嗎？」→ SSH 密碼和 sudo 密碼是兩件事，進門用鑰匙，進門後動系統還是要密碼
+  - 「為什麼有 SSH key 就能免密碼？」→ NAS 的 authorized_keys 記錄哪些公鑰允許登入，你有對應私鑰就進得來
+  - 「那不是很危險？誰都能拿 key 進來？」→ 你控制 authorized_keys 清單，只有登記在上面的才能進
+- 怎麼扒：authorized_keys 的兩把 key（Mac 和 ClaudeCode）、private/public key 的關係
+- 補充：在 NAS 上禁用密碼登入的步驟、為什麼 key-based 比密碼更安全
+
+### NAS 安全加固：UFW、fail2ban、禁用密碼登入
+- 小白問題（直接寫進文章）：
+  - 「我以為有 Cloudflare Tunnel 就安全了」→ Tunnel 保護的是服務 port，SSH 是另一條路
+  - 「UFW 設定前為什麼要先開 22？」→ 先開洞再關門，不然把自己鎖在外面
+  - 「安裝 UFW 為什麼會移除 iptables-persistent？」→ 兩個都在管防火牆規則，不能並存，要手動把規則搬進 UFW
+- 怎麼扒：剛剛做的三步驟（禁密碼 → UFW → fail2ban）、VM DNAT 規則搬到 before.rules 的原因
+- 補充：Tailscale 的 tailscale0 為什麼要全開、fail2ban 的運作原理
+
 ---
 
 ## 入門層（小白能看懂，不需要動手）
