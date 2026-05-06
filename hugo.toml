@@ -3,13 +3,64 @@ languageCode = 'zh-tw'
 title = 'gakes'
 theme = 'PaperMod'
 
+defaultContentLanguage = 'zh-tw'
+enableRobotsTXT = true
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
+
 [params]
   description = 'Gurry, Annie, Kelly, Emily & Sally'
   author = 'Gurry'
   keywords = ['NAS', 'homelab', 'DevOps', 'AI']
 
-[outputs]
-  home = ['HTML', 'JSON']
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  ShowRssButtonInSectionTermList = true
 
-[markup.goldmark.renderer]
-  unsafe = true
+  [params.homeInfoParams]
+    Title = "gakes \U0001F44B"
+    Content = "Gurry 的角落 — 紀錄 NAS、homelab、DevOps 與 AI 的折騰過程。"
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/gurry0927'
+
+  [[params.socialIcons]]
+    name = 'rss'
+    url = '/index.xml'
+
+  [params.cover]
+    hiddenInList = true
+    hiddenInSingle = false
+    responsiveImages = true
+
+[menu]
+  [[menu.main]]
+    identifier = 'posts'
+    name = '文章'
+    url = '/posts/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'tags'
+    name = '標籤'
+    url = '/tags/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'archive'
+    name = '彙整'
+    url = '/archives/'
+    weight = 30
