@@ -1,6 +1,6 @@
 baseURL = 'https://gakes.net/'
 languageCode = 'zh-tw'
-title = 'gakes'
+title = 'GAKES'
 theme = 'PaperMod'
 
 defaultContentLanguage = 'zh-tw'
@@ -32,8 +32,8 @@ enableRobotsTXT = true
   ShowRssButtonInSectionTermList = true
 
   [params.homeInfoParams]
-    Title = "gakes \U0001F44B"
-    Content = "Gurry 的角落 — 紀錄 NAS、homelab、DevOps 與 AI 的折騰過程。"
+    Title = "一個正在被寫下的我"
+    Content = "Grow · Adapt · Kindle · Explore · Share — 在 homelab、教室與生活的角落，留下的折騰與想說的話。"
 
   [[params.socialIcons]]
     name = 'github'
