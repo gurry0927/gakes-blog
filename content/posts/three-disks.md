@@ -4,6 +4,7 @@ draft = false
 title = '三塊硬盤的分工戰略：用老零件撐起一個 NAS'
 description = '有限硬體、謹慎規劃、一個關於壽命與備份的選擇題'
 tags = ['NAS', 'homelab', '備份', '硬體']
+mermaid = true
 +++
 
 ## 起點：一塊賣不掉的主機板
@@ -72,6 +73,25 @@ HDD 持續旋轉 = 持續磨損 = 壽命縮短。這是我最不想看到的事�
 
 備份完就休眠，幾乎不動。這顆硬碟已經上萬小時，本來早該退休的，但用這個設計把它的壽命延長。維持在最低的讀寫壓力下，理論上還能用很久。
 
+```mermaid
+graph TD
+    subgraph 服務
+        SYS[系統 / Docker Images]
+        DB[資料庫]
+    end
+    subgraph 媒體與資料
+        PHOTO[照片庫]
+        VIDEO[影片下載]
+        SHARE[家庭共用]
+    end
+    SYS --> SSD[SSD 500GB 熱區]
+    DB --> SSD
+    PHOTO --> HDD[紅標 HDD 2TB 溫區]
+    VIDEO --> HDD
+    SHARE --> HDD
+    HDD -->|每天 03:00 自動複製| BAK[舊 HDD 500GB 冷備份]
+```
+
 ---
 
 ## 我曾經以為 RAID 是備份
@@ -97,6 +117,22 @@ HDD 持續旋轉 = 持續磨損 = 壽命縮短。這是我最不想看到的事�
 所以 500GB 對應 2TB 為什麼還夠？因為大部分檔案每天都沒變，只有新增或修改的檔案才會佔新空間。
 
 我 500GB 的備份盤，輕鬆塞進七天完整快照。
+
+```mermaid
+graph LR
+    subgraph Day1[第一天備份]
+        A1[file_a]
+        B1[file_b]
+    end
+    subgraph Day2[第二天備份]
+        A2[file_a<br/>hardlink]
+        B2[file_b<br/>已修改]
+        C2[file_c<br/>新增]
+    end
+    A2 -.->|指向同一份，不佔空間| A1
+    B2 -->|佔新空間|B2
+    C2 -->|佔新空間|C2
+```
 
 主盤哪天真的掛了，找最近的快照復原就好。
 
