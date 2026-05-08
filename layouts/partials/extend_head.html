@@ -14,3 +14,106 @@
   });
 </script>
 {{ end }}
+
+{{/* Cloudflare Web Analytics — pageviews, visitors, countries, referrers */}}
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1123518bd53f45b087130cc4b7b852eb"}'></script>
+
+{{/* Reading progress bar + completion mark — only on single article pages */}}
+{{ if eq .Kind "page" }}
+<style>
+  .reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity .3s ease, width .06s linear;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  .reading-progress-bar.is-visible { opacity: .55; }
+
+  .reading-complete-mark {
+    text-align: center;
+    margin: 3rem 0 1rem;
+    color: var(--secondary);
+    font-size: .85rem;
+    letter-spacing: .1em;
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+  .reading-complete-mark.is-visible { opacity: .6; }
+</style>
+<script>
+(function () {
+  function init() {
+    var article = document.querySelector('article.post-single')
+               || document.querySelector('article')
+               || document.querySelector('main .post-content');
+    if (!article) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'reading-progress-bar';
+    document.body.appendChild(bar);
+
+    var mark = document.createElement('div');
+    mark.className = 'reading-complete-mark';
+    mark.textContent = '— 讀到這裡了 —';
+    article.appendChild(mark);
+
+    var ticking = false;
+    var completedOnce = false;
+
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var topAbs = rect.top + window.scrollY;
+      var h = article.offsetHeight;
+      var vh = window.innerHeight;
+      var sy = window.scrollY;
+
+      // progress: 0 = article entering viewport, 1 = article bottom reaches viewport bottom
+      var start = topAbs - vh * 0.2;
+      var end = topAbs + h - vh;
+      var p = end > start ? (sy - start) / (end - start) : 0;
+      p = Math.max(0, Math.min(1, p));
+
+      bar.style.width = (p * 100) + '%';
+
+      // show after 100px scrolled, hide once nearly done
+      if (sy > 100 && p > 0.02 && p < 0.97) {
+        bar.classList.add('is-visible');
+      } else {
+        bar.classList.remove('is-visible');
+      }
+
+      // reveal "讀到這裡了" once at 95%
+      if (p >= 0.95 && !completedOnce) {
+        completedOnce = true;
+        mark.classList.add('is-visible');
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+{{ end }}
