@@ -37,6 +37,23 @@
 - 怎麼扒：剛剛做的三步驟（禁密碼 → UFW → fail2ban）、VM DNAT 規則搬到 before.rules 的原因
 - 補充：Tailscale 的 tailscale0 為什麼要全開、fail2ban 的運作原理
 
+### 防禦工程：當第二個 AI 跟我說我的 NAS 在裸奔
+- 起點故事：別的 AI 看完我家服務描述後丟出三條警告（Docker 繞過 UFW、Samba bind 在 `0.0.0.0`/`[::]`、IPv6 直連是現代家用 NAS 的盲區）；我請 ClaudeCode 進來深掃，又挖出更多——`.env` 644 全機可讀、nas-dashboard 是 `docker.sock + network: host` 的「單點崩潰」、Immich Postgres image 卡 7 個月沒更新
+- 小白問題（直接寫進文章）：
+  - 「我以為 Cloudflare Tunnel + 沒做 port forwarding 就等於對外鎖死了」→ **錯**。中華電信給每戶 `/64` 全球可路由 IPv6，每台設備都拿到公網 IP，沒有 NAT 這層遮蔽——只要 router IPv6 firewall 沒擋，你 Samba/SSH 全部對全世界開
+  - 「我怎麼知道 router 真的有擋 IPv6？」→ 從手機 4G 連自己的公網 IPv6 試試。我從 Mac 開熱點 `ssh -v gakes@2001:b011:...` 看到 `Operation timed out` 那刻才真的放下心。**設定看半天不如實測一次**
+  - 「我以為 UFW 設好就安全」→ Docker 直接操作 iptables 繞過 UFW。Docker container 對外開的 port 跟 UFW 完全平行——你必須在 compose 裡把 ports 改成 `127.0.0.1:port` binding 才真的擋
+- 三層防禦的故事：
+  - **邊緣（router 層）** — IPv6 防火牆（很多人沒驗證過、預設可能沒開）
+  - **Host（NAS 自己）** — `chmod 600` 收回 `.env`、Docker compose 改 `127.0.0.1` binding、Samba `bind interfaces only` 只掛 LAN + localhost
+  - **App** — hosts allow 白名單兜底（前兩層都破還能擋）
+- 沒解的小謎（值得寫進文章當意外故事）：Samba 4.19 對 POINTOPOINT 介面（Tailscale）silently skip——`testparm` 顯示設定正確、log 沒任何錯誤、但 `ss -tln` 就是 bind 不到 `100.104.47.27`。最後在「LAN-only 但 Tailscale 沒 SMB」跟「bind 0.0.0.0 + hosts allow 兜底」之間做 trade-off
+- 跟 AI 怎麼說 →：「請從**外面（公網）**的視角盤點我這台 NAS 有哪些 port 對外可達、用什麼程式在 listen、各服務的 `.env` 權限對不對。按嚴重度排序給我一份清單，並對每一項提具體修法。」
+- 補充：
+  - **縱深防禦不是「重複」**——是「假設前一層會失守」的心理準備；router 哪天 reset、host 哪天裝新服務暴露 port、container 哪天有 RCE 漏洞，下一層永遠還在
+  - 接續 #2「信任 = 可撤回的權限清單」——這篇是「**防禦 = 可以分層的清單**」，同個思維的另一面
+  - 「我怎麼跟 AI 一起做 audit」這個過程本身值得記下來，是 2026 之後的小白標配能力——不需要變專家，但要會請 AI 站在攻擊者位置看自己
+
 ---
 
 ## 入門層（小白能看懂，不需要動手）
@@ -126,3 +143,20 @@
 
 ### yt-dlp 下載器：自架影片下載服務
 - 怎麼扒：設定方式、存到 HDD 路徑
+
+---
+
+## TODO（系列維運）
+
+### Cross-link pass
+等 #3〈NAS 憲法〉、#4〈Ubuntu Server〉、#5〈Tailscale〉至少幾篇上線後，回頭把各篇之間的 internal link 一次補齊：
+
+- **#2〈SSH Key〉** Q2 結尾「順手把密碼登入關掉」forward ref → 同篇段落 anchor
+- **#2〈SSH Key〉** 段 6「下一篇〈NAS 憲法〉」→ #3 文章
+- **#3〈NAS 憲法〉** 提到 SSH key 的部分 → 回扣 #2
+- **#4〈Ubuntu Server〉** 提到 Tailscale 的部分 → #5
+- **#5〈Tailscale〉** 段 1 鉤子提到 #2 SSH 從不對外 → 回扣 #2
+- 任何文章提到 `Docker Compose 未來會有專文介紹` → 等 Docker 篇寫完補 link
+- 任何文章提到 INFRA.md → 統一指向 #3〈NAS 憲法〉
+
+集中做的好處：風格一致、密度可控、避免零散加 link 造成不對齊。

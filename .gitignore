@@ -5,3 +5,6 @@
 resources/_gen
 public/
 hugo_stats.json
+
+# 含環境敏感資訊（公網 IPv6、port、設備清單）的內部筆記、不進 repo
+drafts/_my_nas_tour.md
