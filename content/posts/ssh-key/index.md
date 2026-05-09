@@ -6,10 +6,9 @@ description = '一份只有兩行的白名單，兩把人跟 AI 共用的家裡�
 tags = ['NAS', 'homelab', 'SSH', 'AI協作', '小白篇', 'Linux']
 mermaid = true
 
-# TODO: 配封面圖（建議：抽象的鑰匙/門鎖視覺，避免硬體照重複）
-# [cover]
-#   image = 'cover.jpg'
-#   alt = '一把鑰匙的特寫'
+[cover]
+  image = 'cover.jpg'
+  alt = '兩把形狀不同的鑰匙、用白繩綁在一起、放在大理石檯面上'
 +++
 
 ## 兩把鑰匙
