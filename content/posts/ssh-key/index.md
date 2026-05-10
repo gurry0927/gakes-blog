@@ -1,6 +1,6 @@
 +++
-date = '2026-05-07'
-draft = true
+date = '2026-05-10'
+draft = false
 title = '【小白篇】SSH Key 是什麼：兩把家裡的鑰匙，我跟 AI 共用'
 description = '一份只有兩行的白名單，兩把人跟 AI 共用的家裡鑰匙——關於信任、撤回、與裝置入口的故事。'
 tags = ['NAS', 'homelab', 'SSH', 'AI協作', '小白篇', 'Linux']
