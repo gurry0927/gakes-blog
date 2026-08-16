@@ -63,6 +63,33 @@
     letter-spacing: .02em;
   }
 
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0 2rem;
+  }
+
+  .screenshot-card {
+    margin: 0;
+  }
+
+  .screenshot-card img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--entry);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .1);
+  }
+
+  .screenshot-card figcaption {
+    margin-top: .55rem;
+    color: var(--secondary);
+    font-size: .82rem;
+    text-align: center;
+  }
+
   @media (max-width: 520px) {
     .tool-button {
       width: 100%;

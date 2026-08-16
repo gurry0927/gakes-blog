@@ -23,6 +23,23 @@ TocOpen = false
   <a class="tool-button" href="https://github.com/gurry0927/stock-ledger/issues">回報問題</a>
 </div>
 
+## 畫面預覽
+
+<div class="screenshot-grid">
+  <figure class="screenshot-card">
+    <img src="screenshot-overview.jpg" alt="股票帳本的個股總覽畫面，顯示流水筆數、累計買進支出、個股總覽與持有中股票。" loading="lazy">
+    <figcaption>個股總覽</figcaption>
+  </figure>
+  <figure class="screenshot-card">
+    <img src="screenshot-add-record.jpg" alt="股票帳本的新增紀錄畫面，包含股票代號、股票名稱、日期、類型、成交股價與股數欄位。" loading="lazy">
+    <figcaption>新增紀錄</figcaption>
+  </figure>
+  <figure class="screenshot-card">
+    <img src="screenshot-add-to-home.jpg" alt="iPhone Safari 分享選單中的加入主畫面選項，用來把股票帳本放到手機桌面。" loading="lazy">
+    <figcaption>加入主畫面</figcaption>
+  </figure>
+</div>
+
 ## 它在解決什麼
 
 我想要的是一個很小、很直接的股票帳本：
