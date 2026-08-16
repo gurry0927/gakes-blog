@@ -1,5 +1,75 @@
 <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | absURL }}">
 
+<style>
+  .tool-actions,
+  .tool-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+
+  .tool-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.55rem;
+    padding: .62rem .95rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--primary);
+    background: var(--entry);
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .tool-button:hover {
+    border-color: var(--primary);
+  }
+
+  .tool-button.primary {
+    color: var(--theme);
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .tool-card {
+    padding: 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--entry);
+  }
+
+  .tool-card h2 {
+    margin: .25rem 0 .65rem;
+    font-size: 1.35rem;
+  }
+
+  .tool-card p {
+    margin: 0 0 .8rem;
+  }
+
+  .tool-eyebrow {
+    color: var(--secondary);
+    font-size: .85rem;
+    letter-spacing: .02em;
+  }
+
+  @media (max-width: 520px) {
+    .tool-button {
+      width: 100%;
+    }
+  }
+</style>
+
 {{ if .Params.mermaid }}
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script>

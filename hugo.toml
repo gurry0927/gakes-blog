@@ -55,6 +55,11 @@ enableRobotsTXT = true
     url = '/posts/'
     weight = 10
   [[menu.main]]
+    identifier = 'tools'
+    name = '工具'
+    url = '/tools/'
+    weight = 15
+  [[menu.main]]
     identifier = 'tags'
     name = '標籤'
     url = '/tags/'
