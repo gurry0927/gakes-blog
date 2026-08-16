@@ -34,10 +34,6 @@ TocOpen = false
     <img src="screenshot-add-record.jpg" alt="股票帳本的新增紀錄畫面，包含股票代號、股票名稱、日期、類型、成交股價與股數欄位。" loading="lazy">
     <figcaption>新增紀錄</figcaption>
   </figure>
-  <figure class="screenshot-card">
-    <img src="screenshot-add-to-home.jpg" alt="iPhone Safari 分享選單中的加入主畫面選項，用來把股票帳本放到手機桌面。" loading="lazy">
-    <figcaption>加入主畫面</figcaption>
-  </figure>
 </div>
 
 ## 它在解決什麼
@@ -116,6 +112,11 @@ TocOpen = false
 ### 加到手機桌面
 
 如果是在 iPhone 上，建議用 Safari 打開工具頁，再按分享按鈕，選「加入主畫面」。
+
+<figure class="screenshot-card screenshot-inline">
+  <img src="screenshot-add-to-home.jpg" alt="iPhone Safari 分享選單中的加入主畫面選項，用來把股票帳本放到手機桌面。" loading="lazy">
+  <figcaption>Safari 分享選單裡的「加入主畫面」</figcaption>
+</figure>
 
 之後它會像一個小 App 一樣出現在手機桌面。打開時比較少瀏覽器網址列和按鈕的干擾，用起來會安靜很多，也比較像真正的記帳工具。
 
